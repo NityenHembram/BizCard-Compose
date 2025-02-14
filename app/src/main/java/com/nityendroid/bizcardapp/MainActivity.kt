@@ -72,6 +72,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.nityendroid.bizcardapp.ui.theme.BizCardAppTheme
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 //this is the mainActivity
+//this change is for test
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
