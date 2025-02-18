@@ -39,6 +39,7 @@ pipeline {
 
     triggers {
         // Automatically trigger the build for every push
-        pollSCM('* * * * *') // Alternatively, use a webhook for GitHub/GitLab
+        //pollSCM('* * * * *') // Alternatively, use a webhook for GitHub/GitLab
+        githubPush()
     }
 }
