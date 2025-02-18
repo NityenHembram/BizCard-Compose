@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    environment {
+        // Set up environment variables
+        ANDROID_HOME = "${env.HOME}/Library/Android/sdk"
+        GRADLE_PATH = "./gradlew"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from your repository
+                checkout scm
+            }
+        }
+
+        stage('Build APK') {
+            steps {
+                // Clean and build the project
+                sh './gradlew clean assembleDebug'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                // Run Android unit tests
+                sh './gradlew test'
+            }
+        }
+
+        stage('Archive APK') {
+            steps {
+                // Archive the generated APK
+                archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
+            }
+        }
+    }
+
+    triggers {
+        // Automatically trigger the build for every push
+        pollSCM('* * * * *') // Alternatively, use a webhook for GitHub/GitLab
+    }
+}
